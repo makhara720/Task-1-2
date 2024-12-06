@@ -1,0 +1,15 @@
+.header {
+
+    font-size: 16px;
+
+    .active {
+        background: linear-gradient(135deg,
+                #5E5DF0,
+                #4A47F5);
+        border-radius: 10px;
+    }
+
+    a {
+        color: white;
+    }
+}

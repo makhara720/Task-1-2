@@ -1,0 +1,8 @@
+<div class="task-item" [ngClass]="status">
+    <h3>{{ taskName }}</h3>
+    <p>Due: {{ dueDate | date: 'short' }}</p>
+    <p>Status: {{ status }}</p>
+    <button class="button-34" (click)="markCompleted()" [disabled]="status === 'completed'">
+        Mark as Completed
+    </button>
+</div>

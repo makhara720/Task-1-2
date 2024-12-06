@@ -1,0 +1,67 @@
+<div class="form-container">
+    <h2>პროდუქტის შეფასება</h2>
+    <form [formGroup]="reviewForm" (ngSubmit)="submit()">
+
+        <div [ngClass]="{ 'has-error': InvalidValid('fullName') }">
+            <label for="fullName">სრული სახელი:</label>
+            <input id="fullName" formControlName="fullName" required pattern="^[a-zA-Z\s]+$" />
+            <div *ngIf="InvalidValid('fullName')" class="error">სახელი უნდა შეიცავდეს მხოლოდ ასოებს.
+            </div>
+        </div>
+
+        <div [ngClass]="{ 'has-error': InvalidValid('email') }">
+            <label for="email">ელ.ფოსტა:</label>
+            <input id="email" formControlName="email" required email />
+            <div *ngIf="InvalidValid('email')" class="error">შეიყვანეთ ვალიდური მეილის ფორმა.</div>
+        </div>
+
+        <div [ngClass]="{ 'has-error': InvalidValid('productName') }">
+            <label for="productName">პროდუქტის სახელი:</label>
+            <input id="productName" formControlName="productName" required />
+            <div *ngIf="InvalidValid('productName')" class="error">პროდუქტის სახელი აუცილებელია.</div>
+        </div>
+
+        <div [ngClass]="{ 'has-error': InvalidValid('rating') }">
+            <label for="rating">შეფასება</label>
+            <select id="rating" formControlName="rating" required>
+                <option value="" disabled>შეაფასეთ</option>
+                <option value="1">★☆☆☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="4">★★★★☆</option>
+                <option value="5">★★★★★</option>
+            </select>
+            <div *ngIf="InvalidValid('rating')" class="error">შეფასება აუცილებელია.</div>
+        </div>
+
+        <div [ngClass]="{ 'has-error': InvalidValid('reviewText') }">
+            <label for="reviewText">შენი აზრი:</label>
+            <textarea id="reviewText" formControlName="reviewText" required minlength="10" rows="4"></textarea>
+            <div *ngIf="InvalidValid('reviewText')" class="error">შეფასება უნდა იყოს მინიმუმ 10 ასო</div>
+        </div>
+
+        <div formArrayName="LikedProducts">
+            <h3>რა მოგეწონა პროდუქტის შესახებ</h3>
+            <button type="button" (click)="addInputs()">დამატება</button>
+            <div *ngFor="let feature of LikedProducts().controls; let i = index" [formGroupName]="i">
+                <input />
+                <button type="button" (click)="removeFeature(i)">წაშლა</button>
+            </div>
+        </div>
+
+        <div [ngClass]="{ 'has-error': InvalidValid('wouldRecommend') }">
+            <h3>გაუწევდით რეკომენდაციას ამ პროდუქტს</h3>
+            <label>
+                <input type="radio" formControlName="wouldRecommend" value="yes" /> კი
+            </label>
+            <label>
+                <input type="radio" formControlName="wouldRecommend" value="no" /> არა
+            </label>
+        </div>
+
+        <div>
+            <button type="submit">დადასტურება</button>
+        </div>
+
+    </form>
+</div>

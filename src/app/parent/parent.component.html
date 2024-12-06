@@ -1,0 +1,13 @@
+<div class="todo-container">
+    <button class="button-34" (click)="toggleFilter()">
+        Show {{ filter === 'pending' ? 'Completed' : 'Pending'}} Tasks
+    </button>
+
+    <div class="box" *ngFor="let task of tasks; let i = index">
+        <div class="to-do" *ngIf="filter === 'all' || filter === task.status">
+            <app-task-item [taskName]="task.taskName" [dueDate]="task.dueDate" [status]="task.status"
+                (markAsCompleted)="markTaskAsCompleted(i)" [appHighlightUrgent]="task.dueDate">
+            </app-task-item>
+        </div>
+    </div>
+</div>
